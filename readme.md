@@ -2,7 +2,7 @@
 Along with [MeshToPointcloudFPS](https://github.com/salehjg/MeshToPointcloudFPS), this script is used to convert mesh files of the type `*.obj` to point clouds stored in HDF5 format. The script will also handle splitting the dataset into train-val-test with 60-20-20 % ratio.
 
 # Data Conversion
-The `MeshToPointcloudFPS` executable is responsible for data conversion from meshes `*.obj` to point clouds `*.h5` while down-sampling the point clouds to the target number of points (`-n 1024`).  
+The `MeshToPointcloudFPS` executable is responsible for data conversion from meshes `*.obj` to point clouds `*.h5` along with down-sampling the point clouds to the target number of points (`-n 1024`).  
 
 # Pre-requirements
 1. Build [MeshToPointcloudFPS](https://github.com/salehjg/MeshToPointcloudFPS) and copy the compiled executable beside the python script in this repository as `FpsCpu`.
