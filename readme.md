@@ -1,5 +1,8 @@
 # ShapeNetCore.v2 Preparation
-Along with [MeshToPointcloudFPS](https://github.com/salehjg/MeshToPointcloudFPS), this script is used to convert mesh files of the type `*.obj` to point clouds stored in HDF5 format. The script will also handles splitting the dataset into train-val-test sets with 60-20-20 % ratio.
+Along with [MeshToPointcloudFPS](https://github.com/salehjg/MeshToPointcloudFPS), this script is used to convert mesh files of the type `*.obj` to point clouds stored in HDF5 format. The script will also handle splitting the dataset into train-val-test with 60-20-20 % ratio.
+
+# Data Conversion
+The `MeshToPointcloudFPS` executable is responsible for data conversion from meshes `*.obj` to point clouds `*.h5` while down-sampling the point clouds to the target number of points (`-n 1024`).  
 
 # Pre-requirements
 1. Build [MeshToPointcloudFPS](https://github.com/salehjg/MeshToPointcloudFPS) and copy the compiled executable beside the python script in this repository as `FpsCpu`.
@@ -15,7 +18,7 @@ Along with [MeshToPointcloudFPS](https://github.com/salehjg/MeshToPointcloudFPS)
 8. Check the results at `OUTPUT_PATH` (`train6-2-2.h5`, `val6-2-2.h5`, and `test6-2-2.h5`).
 
 # Data Types
-The `dtype` for dataset is `np.float32` while it is `np.int32` for the labels.
+The `dtype` for the dataset is `np.float32` and `np.int32` for the labels.
 
 # Data Class Names
 * `labels.id.txt` at `OUTPUT_PATH` lists the `synid` of the classes in the dataset.
