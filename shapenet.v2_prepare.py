@@ -92,6 +92,14 @@ class DatasetParser:
             Parallel(n_jobs=n_jobs)(delayed(run_the_command_obj2hdf5)(file) for file in tqdm(obj_files))
 
     def concatenate_hdf5_files_split622(self):
+        def permute_data_label(dataset, label):
+            result_data = np.copy(dataset)
+            result_label = np.copy(label)
+            indices = np.random.permutation(dataset.shape[0])
+            np.take(dataset, indices, axis=0, out=result_data)
+            np.take(label, indices, axis=0, out=result_label)
+            return result_data, result_label
+
         print('Listing *.h5 files...')
 
         class_folder_names = [name for name in os.listdir(self.path_dataset) if
@@ -149,6 +157,8 @@ class DatasetParser:
             concat_h5.create_dataset('label', data=labels)
             concat_h5.close()
 
+            data_current_concat, labels = permute_data_label(data_current_concat, labels)
+
             # splitting train val test sets here
             n = data_current_concat.shape[0]
             splits_n = [
@@ -172,6 +182,8 @@ class DatasetParser:
         trainset_h5.create_dataset('data', data=trainset_data, dtype=np.float32)
         trainset_h5.create_dataset('label', data=trainset_label, dtype=np.int32)
         trainset_h5.close()
+        np.save(self.path_output + 'train.data.npy', trainset_data)
+        np.save(self.path_output + 'train.label.npy', trainset_label)
         print("\tTrain Set Data  : ", trainset_data.shape)
         print("\tTrain Set Labels: ", trainset_label.shape)
 
@@ -179,6 +191,8 @@ class DatasetParser:
         valset_h5.create_dataset('data', data=valset_data, dtype=np.float32)
         valset_h5.create_dataset('label', data=valtset_label, dtype=np.int32)
         valset_h5.close()
+        np.save(self.path_output + 'val.data.npy', valset_data)
+        np.save(self.path_output + 'val.label.npy', valtset_label)
         print("\tValidation Set Data  : ", valset_data.shape)
         print("\tValidation Set Labels: ", valtset_label.shape)
 
@@ -186,6 +200,8 @@ class DatasetParser:
         testset_h5.create_dataset('data', data=testset_data, dtype=np.float32)
         testset_h5.create_dataset('label', data=testset_label, dtype=np.int32)
         testset_h5.close()
+        np.save(self.path_output + 'test.data.npy', testset_data)
+        np.save(self.path_output + 'test.label.npy', testset_label)
         print("\tTest Set Data  : ", testset_data.shape)
         print("\tTest Set Labels: ", testset_label.shape)
 

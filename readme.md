@@ -12,7 +12,7 @@ The `MeshToPointcloudFPS` executable is responsible for data conversion from mes
 5. In the script: 
    - Set `DATASET_PATH` to the unzipped dataset directory.
    - Set `OUTPUT_PATH` to an empty folder of your choice to store the processed data.
-   - Set `TAXONOMY_PATH` to the absolute path of the `taxonomy.json` in the unzipped dataset directory.
+   - Set `TAXONOMY_PATH` to the absolute path of the `taxonomy.json` at the unzipped dataset directory.
 6. Set `n_jobs` to the number of the CPU cores that you have on your system.
 7. Run the script.
 8. Check the results at `OUTPUT_PATH` (`train6-2-2.h5`, `val6-2-2.h5`, and `test6-2-2.h5`).
